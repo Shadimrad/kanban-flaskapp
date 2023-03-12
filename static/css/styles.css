@@ -1,0 +1,26 @@
+body {
+    text-align: center;
+    background-color: skyblue;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+}
+
+form {
+    display: inline-block;
+    text-align: left;
+    margin: auto; /* add this to center the form horizontally */
+}
+
+label {
+    display: block; /* add this to center the labels */
+    text-align: center;
+}
+
+input[type="text"], input[type="password"], input[type="submit"] {
+    display: block; /* add this to center the input elements */
+    margin: auto; /* add this to center the input elements horizontally */
+}
+
