@@ -15,6 +15,4 @@ myapp/
 │   └── task.html
 └── static/
     ├── css/
-    │   └── styles.css
-    └── js/
-        └── app.js
+        └── styles.css
