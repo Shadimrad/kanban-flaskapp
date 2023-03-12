@@ -1,17 +1,42 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
-import sqlite3
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.secret_key = 'mysecretkey'
+db = SQLAlchemy(app)
 
-tasks = {
-    "to_do": ["Task 1", "Task 2", "Task 3"],
-    "doing": ["Task 4"],
-    "done": ["Task 5", "Task 6"]
-}
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
 
-@app.route("/")
+@app.route('/')
+def index():
+    if 'user_id' in session:
+        return render_template('index.html')
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template("login.html")
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username, password=password).first()
+        if user:
+            session['user_id'] = user.id
+            return redirect('/')
+        else:
+            error = 'Invalid login credentials. Please try again.'
+            return render_template('login.html', error=error)
+    else:
+        return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect('/')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -21,7 +46,10 @@ def signup():
         password = request.form['password']
         # Validate the user's input
         if username and password:
-            # TO DO -> Create a new user account in your database
+            # Create a new user account in the database
+            new_user = User(username=username, password=password)
+            db.session.add(new_user)
+            db.session.commit()
             # Redirect the user to the login page
             return redirect(url_for('login'))
         else:
@@ -32,69 +60,9 @@ def signup():
         # Render the sign-up page
         return render_template('signup.html')
 
-# @app.route("/add_task", methods=["POST"])
-# def add_task():
-#     task = request.form.get("task")
-#     tasks["to_do"].append(task)
-#     return redirect(request.referrer)
 
-# @app.route("/move_task", methods=["POST"])
-# def move_task():
-#     task = request.form.get("task")
-#     target_state = request.form.get("column")
-#     for task_state in tasks:
-#         if task in tasks[task_state]:
-#             tasks[task_state].remove(task)
-#             break
-#     tasks[target_state].append(task)
-#     return redirect(request.referrer)
-
-# @app.route("/delete_task", methods=["POST"])
-# def delete_task():
-#     task = request.form.get("task")
-#     for state in tasks:
-#         if task in tasks[state]:
-#             tasks[state].remove(task)
-#     return redirect(request.referrer)
-
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
-
-#         conn = sqlite3.connect('users.db')
-#         c = conn.cursor()
-
-#         c.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
-#         user = c.fetchone()
-
-#         conn.close()
-
-#         if user:
-#             session['username'] = username
-#             return redirect(url_for('home'))
-#         else:
-#             error = 'Invalid username or password'
-#             return render_template('login.html', error=error)
-#     else:
-#         return render_template('login.html')
-
-
-# @app.route('/home')
-# def home():
-#     username = session.get('username')
-
-#     if username:
-#         conn = sqlite3.connect('users.db')
-#         c = conn.cursor()
-
-#         c.execute('SELECT * FROM users WHERE username = ?', (username,))
-#         user = c.fetchone()
-
-#         conn.close()
-
-#         return render_template('home.html', username=user[1])
-#     else:
-#         return redirect(url_for('login'))
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+        print('Database created successfully')
+    app.run(debug=True)

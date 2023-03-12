@@ -1,5 +1,5 @@
 # kanban-flaskapp
-A web based personalized Kanban (board) made using flask
+A web-based personalized Kanban (board) made using flask
 
 ```app structure
 myapp/
@@ -14,5 +14,5 @@ myapp/
 │   ├── signup.html
 │   └── task.html
 └── static/
-    ├── css/
+    └── css/
         └── styles.css
