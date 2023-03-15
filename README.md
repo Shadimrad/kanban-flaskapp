@@ -1,6 +1,7 @@
 # kanban-flaskapp
 A web-based personalized Kanban (board) made using flask
-
+#### Demo
+[Link to the YouTube video](https://youtu.be/kGfiQkaXrAk)
 
 #### app structure:
 ```
