@@ -1,15 +1,20 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from models import Base, User, Board, Task, Contributor
+from flask_login import LoginManager
+
+
+db = SQLAlchemy()
+login = LoginManager()
 
 
 app = Flask(__name__)
-app.config.from_object('app.config')
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///kanban.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.secret_key = "random secret key!"
 
-db = SQLAlchemy(app)
+db.init_app(app)
+login.init_app(app)
+login.login_view = 'login'
 
-from app.routes.auth import auth_bp
-from app.routes.views import views_bp
-
-app.register_blueprint(auth_bp)
-app.register_blueprint(views_bp)
+with app.app_context():
+    from app import main_app

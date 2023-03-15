@@ -1,0 +1,150 @@
+body {
+    text-align: center;
+    background-color: skyblue;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+}
+
+form {
+    display: inline-block;
+    text-align: left;
+    margin: auto; /* add this to center the form horizontally */
+}
+
+label {
+    display: block; /* add this to center the labels */
+    text-align: center;
+}
+
+input[type="text"], input[type="password"], input[type="submit"] {
+    display: block; /* add this to center the input elements */
+    margin: auto; /* add this to center the input elements horizontally */
+}
+
+/* Set box-sizing property to include padding and borders in width and height */
+* {
+    box-sizing: border-box;
+}
+
+
+/* Set background color for the header */
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+/* Style the logout button */
+.header__logout input[type="submit"] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* Style the h2 element in the header */
+.header h2 {
+    margin: 0;
+}
+
+/* Style the add-todo section */
+.add-todo {
+    padding: 10px;
+}
+
+/* Style the form in the add-todo section */
+.add-todo__form {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+/* Style the title input field in the add-todo form */
+.add-todo__form--title {
+    flex-grow: 1;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    font-size: 16px;
+}
+
+/* Style the status select field in the add-todo form */
+.add-todo__form--status {
+    padding: 8px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+/* Style the submit button in the add-todo form */
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* Style the error message */
+.error {
+    color: red;
+}
+
+/* Style the kanban board section */
+.kanban {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+/* Style the kanban wrapper */
+.kanban__wrapper {
+    background-color: #f2f2f2;
+    padding: 10px;
+    width: 30%;
+    min-width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Style the h2 element in the kanban wrapper */
+.kanban__wrapper h2 {
+    margin-top: 0;
+}
+
+/* Style the kanban card */
+.kanban__card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: move;
+}
+
+/* Style the update status form */
+.update-status {
+    display: inline-block;
+}
+
+/* Style the delete form */
+.delete {
+    display: inline-block;
+}
+
+/* Style the selected kanban card */
+.kanban__card--selected {
+    background-color: #4CAF50;
+    color: #fff;
+}
