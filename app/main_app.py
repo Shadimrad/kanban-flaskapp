@@ -1,5 +1,5 @@
 from app import db, app
-from flask import request, render_template, redirect, url_for, session, flash, g
+from flask import request, render_template, redirect, url_for, session, g
 from .models import User, Task
 from app  import login
 from flask_login import current_user, login_required, login_user
@@ -71,8 +71,8 @@ def signup():
         if username and password:
             existing_user = User.query.filter_by(username=username).first()
             if existing_user:
-                flash('The username is already taken. Please choose a different one.')
-                return redirect(url_for('signup'))
+                error_msg = 'The username is already taken. Please choose a different one.'
+                return render_template('signup.html', error=error_msg)
             # Create a new user account in the database
             new_user = User(username=username, password=password)
             db.session.add(new_user)
@@ -180,4 +180,5 @@ def delete():
         # log.exception(f"Couldn't delete task: {failed}")
     return redirect(url_for("kanban"))
 
+# trunk-ignore(flake8/E402)
 from app import app 
