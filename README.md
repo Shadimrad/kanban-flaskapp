@@ -2,17 +2,17 @@
 A web-based personalized Kanban (board) made using flask
 
 ```app structure
-myapp/
+app/
 ├── __init__.py
-├── auth.py
+├── main_app.py
 ├── models.py
-├── routes.py
+│
 ├── templates/
 │   ├── base.html
-│   ├── index.html
+│   ├── board.html
 │   ├── login.html
-│   ├── signup.html
-│   └── task.html
+│   └── signup.html
+│ 
 └── static/
     └── css/
         └── styles.css
