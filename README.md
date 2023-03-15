@@ -55,7 +55,7 @@ app/
      $cd kanban-flaskapp #locate the directory
      $python tests.py
 
-#### references
+#### References
 - [Mastering Flask Playlist](https://www.youtube.com/watch?v=stjXX1VMa30&list=PLTgRMOcmRb3OgwZndNgwe4Nhk6lcHY6ZW&index=1)
 
 - [Harvard CS50](https://www.youtube.com/watch?v=oVA0fD13NGI&t=692s)
